@@ -1,0 +1,22 @@
+{
+    "name": "vitorsilmor/santri",
+    "description": "Teste para vaga de desenvolvedor php",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vitor Morais",
+            "email": "vitorsm@id.uff.br"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {"App\\": "app/"},
+        "files": [
+            "config/helpers.php"
+        ]
+    },
+    "scripts": {
+        "subir-servidor" : "cd public && php -S localhost:8000"
+    }
+}
