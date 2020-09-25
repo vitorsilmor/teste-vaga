@@ -22,6 +22,13 @@ abstract class FrontAbstract implements IFrontController
      */
     protected Request $request;
 
+    /**
+     * Conexão com o banco de dados.
+     *
+     * @var \PDO
+     */
+    protected \PDO $db;
+
     public function __construct()
     {
         $request = new Request();
@@ -31,6 +38,19 @@ abstract class FrontAbstract implements IFrontController
         $request->setData(['teste' => 'teste', 'teste2' => 'teste3']);
 
         $this->request = $request;
+    }
+
+    /**
+     * Seta a conexão com o banco.
+     *
+     * @param \PDO $db
+     * @return IFrontController
+     */
+    public function setDb(\PDO $db): IFrontController
+    {
+        $this->db = $db;
+
+        return $this;
     }
 
     /**
