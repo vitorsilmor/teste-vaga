@@ -1,5 +1,11 @@
 <?php
 
+
+/**
+ * IMPORTAÇÃO DA CLASSE DE CONEXÃO COM O BANCO DE DADOS.
+ */
+use App\Connection\Connection;
+
 /**
  * IMPORTA O FRONTCONTROLLER, RESPONSÁVEL POR INICIALIZAR A 
  * APLICAÇÃO.
@@ -19,19 +25,23 @@ include "../config/env.php";
  */
 $routes = include "../config/route.php";
 
+$conn = new Connection();
+$db = $conn->connect();
 
+/**
+ * Realiza a instancia do FrontController.
+ * Faz a setagem de rotas.
+ * Faz a setagem da conexão com o banco de dados.
+ * Inicializa a aplicação.
+ */
 try {
-    /**
-     * INSTANCIA O FRONTCONTROLLER
-     */
+   
     $app = new FrontController();
 
-    /**
-     * FAZ A SETAGEM DAS ROTAS NA APLICAÇÃO
-     */
-    $app->setRoutes($routes);
+    $app->setRoutes($routes)
+        ->setDb($db)
+        ->start();
 
-    $app->start();
 } catch (\Throwable $th) {
     echo $th->getMessage();
 }
