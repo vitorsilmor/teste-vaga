@@ -35,7 +35,7 @@ abstract class FrontAbstract implements IFrontController
 
         $request->setUri($_SERVER['REQUEST_URI']);
         $request->setMethod($_SERVER['REQUEST_METHOD']);
-        $request->setData(['teste' => 'teste', 'teste2' => 'teste3']);
+        $request->setData($_REQUEST);
 
         $this->request = $request;
     }
