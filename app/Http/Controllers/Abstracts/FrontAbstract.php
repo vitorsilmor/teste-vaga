@@ -79,6 +79,11 @@ abstract class FrontAbstract implements IFrontController
             if($route['uri'] == $this->request->getUri()){
                
                 $route['controller'] = getenv('path_controller') . $route['controller'];
+
+                if(!is_null($route['model'])){
+                    $route['model'] = getenv('path_model') . $route['model'];
+                }
+
                 return $route;
             }
         }
