@@ -15,6 +15,14 @@ interface IFrontController
     public function setRoutes(Route $routes): IFrontController;
 
     /**
+     * Seta a conexão com o banco.
+     *
+     * @param \PDO $db
+     * @return IFrontController
+     */
+    public function setDb(\PDO $db): IFrontController;
+
+    /**
      * Inicializa a aplicação.
      *
      * @return void
