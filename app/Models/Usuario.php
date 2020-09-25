@@ -2,15 +2,10 @@
 
 namespace App\Models;
 
-class Usuario
-{
-    /**
-     * Array com as colunas da tabela.
-     *
-     * @var array
-     */
-    protected array $fillable = [];
+use App\Models\Abstracts\Model;
 
+class Usuario extends Model
+{
     /**
      * Nome da tabela.
      *
@@ -18,23 +13,18 @@ class Usuario
      */
     protected string $table = 'usuarios';
 
-    public function create()
-    {
+    /**
+     * Nome da chave primária.
+     *
+     * @var string
+     */
+    protected string $primaryKey = "USUARIO_ID";
 
-    }
+    /**
+     * Array com as colunas da tabela.
+     *
+     * @var array
+     */
+    protected array $fillable = ['USUARIO_ID', 'LOGIN', 'SENHA', 'ATIVO', 'NOME_COMPLETO'];
 
-    public function update(int $id, array $dados)
-    {
-
-    }
-
-    public function show(int $id)
-    {
-
-    }
-
-    public function list()
-    {
-        
-    }
 }
