@@ -19,10 +19,13 @@ class Route
      * @param string $action
      * @return Route
      */
-    public function get(string $uri, string $controller, string $action) : Route
+    public function get(string $uri, string $controller, string $action, ?string $model = null) : Route
     {
         $this->routes['get'][] = [
-            'uri' => $uri, 'controller' => $controller, 'action' => $action
+            'uri'        => $uri, 
+            'controller' => $controller, 
+            'action'     => $action, 
+            'model'      => $model
         ];
 
         return $this;
@@ -36,10 +39,13 @@ class Route
      * @param string $action
      * @return Route
      */
-    public function post(string $uri, string $controller, string $action) : Route
+    public function post(string $uri, string $controller, string $action, ?string $model = null) : Route
     {
         $this->routes['post'][] = [
-            'uri' => $uri, 'controller' => $controller, 'action' => $action
+            'uri'        => $uri, 
+            'controller' => $controller, 
+            'action'     => $action, 
+            'model'      => $model
         ];
 
         return $this;
@@ -53,10 +59,13 @@ class Route
      * @param string $action
      * @return Route
      */
-    public function put(string $uri, string $controller, string $action) : Route
+    public function put(string $uri, string $controller, string $action, ?string $model = null) : Route
     {
         $this->routes['put'][] = [
-            'uri' => $uri, 'controller' => $controller, 'action' => $action
+            'uri'        => $uri, 
+            'controller' => $controller, 
+            'action'     => $action, 
+            'model'      => $model
         ];
 
         return $this;
@@ -70,16 +79,25 @@ class Route
      * @param string $action
      * @return Route
      */
-    public function delete(string $uri, string $controller, string $action) : Route
+    public function delete(string $uri, string $controller, string $action, ?string $model = null) : Route
     {
         $this->routes['delete'][] = [
-            'uri' => $uri, 'controller' => $controller, 'action' => $action
+            'uri'        => $uri, 
+            'controller' => $controller, 
+            'action'     => $action, 
+            'model'      => $model
         ];
 
         return $this;
     }
 
-    public function getRoutes(?string $method = null)
+    /**
+     * Retorna todas as todas.
+     *
+     * @param string|null $method
+     * @return array
+     */
+    public function getRoutes(?string $method = null): array
     {
         if(!is_null($method))
             return $this->routes[strtolower($method)];
