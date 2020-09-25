@@ -19,7 +19,14 @@ class FrontController extends FrontAbstract
         $this->actionExists($routeInfo['controller'], $routeInfo['action']);
 
         $controller = new $routeInfo['controller']();
-        $action     = (string) $routeInfo['action'];
+
+        if(!is_null($routeInfo['model'])){
+            $model = new $routeInfo['model'];
+            $model->setDb($this->db);
+            $controller->setModel($model);
+        }
+
+        $action = (string) $routeInfo['action'];
 
         $controller->$action($this->request);
     }
