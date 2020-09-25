@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers\Abstracts;
 
+use App\Models\Abstracts\Model;
+
 abstract class Controller 
 {
     /**
-     * Conexão com o banco de dados.
+     * Model principal do controller.
      *
-     * @var \PDO
+     * @var Model
      */
-    protected \PDO $db;
+    protected Model $model;
 
     /**
      * Setagem da conexão com o banco de dados.
      *
-     * @param \PDO $db
+     * @param Model $model
      * @return Controller
      */
-    public function setDb(\PDO $db): Controller
+    public function setModel(Model $model): Controller
     {
-        $this->db = $db;
+        $this->model = $model;
 
         return $this;
     }
