@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Abstracts\Controller;
 use App\Http\Request;
 use App\Views\UsuarioView;
 
-class UsuarioController
+class UsuarioController extends Controller
 {
     /**
      * Undocumented function
