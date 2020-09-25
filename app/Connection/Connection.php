@@ -49,10 +49,12 @@ class Connection implements IConnection
      */
     public function connect(): \PDO
     {
-        try{
-			return new \PDO("mysql:host={$this->host};dbname={$this->dbName}", $this->user, $this->password);
-		}catch(\PDOException $e){
-			return $e->getMessage();
-		}
+        $db = new \PDO("mysql:host={$this->host};dbname={$this->dbName}", $this->user, $this->password);
+
+        if($db instanceof \PDO){
+            return $db;
+        }
+
+        throw new \Exception("Houve um erro ao se conectar ao banco de dados. Tente novamente");
     }
 }
