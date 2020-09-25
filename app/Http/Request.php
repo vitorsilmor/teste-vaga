@@ -27,9 +27,9 @@ class Request
     /**
      * Dados da requisição.
      *
-     * @var string
+     * @var stdClass
      */
-    protected stdClass $data;
+    public stdClass $data;
 
     /**
      * Seta os dados transformando-os em um objeto stdClass.
