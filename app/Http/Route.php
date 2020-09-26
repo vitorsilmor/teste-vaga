@@ -26,7 +26,8 @@ class Route
             'controller' => $controller, 
             'action'     => $action, 
             'model'      => $model,
-            'middleware' => $middleware
+            'middleware' => $middleware,
+            'pattern'    => $this->setPattern($uri), 
         ];
 
         return $this;
@@ -45,9 +46,10 @@ class Route
         $this->routes['post'][] = [
             'uri'        => $uri, 
             'controller' => $controller, 
-            'action'     => $action, 
+            'action'     => $action,
             'model'      => $model,
-            'middleware' => $middleware
+            'middleware' => $middleware,
+            'pattern'    => $this->setPattern($uri), 
         ];
 
         return $this;
@@ -68,7 +70,8 @@ class Route
             'controller' => $controller, 
             'action'     => $action, 
             'model'      => $model,
-            'middleware' => $middleware
+            'middleware' => $middleware,
+            'pattern'    => $this->setPattern($uri), 
         ];
 
         return $this;
@@ -89,7 +92,8 @@ class Route
             'controller' => $controller, 
             'action'     => $action, 
             'model'      => $model,
-            'middleware' => $middleware
+            'middleware' => $middleware,
+            'pattern'    => $this->setPattern($uri), 
         ];
 
         return $this;
@@ -107,5 +111,18 @@ class Route
             return $this->routes[strtolower($method)];
             
         return $this->routes;
+    }
+
+    /**
+     * Cria o pattern dessa rota.
+     *
+     * @param string $pattern
+     * @return string
+     */
+    private function setPattern(string $pattern): string
+    {
+        $pattern = implode('/', array_filter(explode('/', $pattern)));
+
+        return '/^' . str_replace('/', '\/', $pattern) . '$/';
     }
 }
