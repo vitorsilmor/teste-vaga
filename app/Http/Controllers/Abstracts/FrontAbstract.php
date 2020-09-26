@@ -75,24 +75,15 @@ abstract class FrontAbstract implements IFrontController
     {
         $method = $this->request->getMethod();
         
+        $patternSent = $this->parseToUri($this->request->getUri());
+
         foreach($this->routes->getRoutes($method) as $route){
-            $uriWithoutGet = explode("?", $this->request->getUri());
-            
-            if($route['uri'] == $uriWithoutGet[0]){
-               
-                $route['controller'] = getenv('path_controller') . $route['controller'];
-
-                if(!is_null($route['model'])){
-                    $route['model'] = getenv('path_model') . $route['model'];
-                }
-
-                if(!is_null($route['middleware'])){
-                    $route['middleware'] = getenv('path_middleware') . $route['middleware'];
-                }
-
+            if(preg_match($route['pattern'], $patternSent)){
+                $this->setPaths($route);
                 return $route;
             }
         }
+
 
         throw new \Exception("Esta rota não existe", 1);
     }
@@ -150,5 +141,53 @@ abstract class FrontAbstract implements IFrontController
             $model->setDb($this->db);
             $controller->setModel($model);
         }
+    }
+
+    /**
+     * Retorna uma string com o pattern.
+     *
+     * @param string $pattern
+     * @return string
+     */
+    private function parseToUri(string $pattern): string
+    {
+        return implode('/', array_filter(explode('/', $pattern)));
+    }
+
+    /**
+     * Seta os paths das variáveis de ambiente.
+     *
+     * @param array $route
+     * @return void
+     */
+    private function setPaths(array &$route): void
+    {
+        $route['controller'] = getenv('path_controller') . $route['controller'];
+
+        if(!is_null($route['model'])){
+            $route['model'] = getenv('path_model') . $route['model'];
+        }
+
+        if(!is_null($route['middleware'])){
+            $route['middleware'] = getenv('path_middleware') . $route['middleware'];
+        }
+    }
+
+    /**
+     * Retorna o parâmetro do recurso.
+     *
+     * @return integer|null
+     */
+    protected function getParam() : ?int
+    {
+        $pieces = explode("/",$this->request->getUri());
+        
+        foreach($pieces as $piece){
+            if(is_numeric($piece)){
+                return $piece;
+            }
+        }
+
+        return null;
     }
 }
