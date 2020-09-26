@@ -52,4 +52,24 @@ class Usuario extends Model
             
         return  $user;
     }
+
+
+    /**
+     * Encontra registros pelo nome.
+     *
+     * @param string $name
+     * @return array|null
+     */
+    public function findByName(string $name): ?array 
+    {
+        $this->query = "SELECT * FROM $this->table WHERE NOME_COMPLETO LIKE ?";
+
+        $stmt = $this->db->prepare($this->query);
+        $stmt->bindValue(1, "%" . $name . "%");
+        $stmt->execute();
+        
+        $users = $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        return  $users;
+    }
 }

@@ -1,46 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>santri</title>
-
-    <link rel="stylesheet" href="static/css/w3.css">
-    <link rel="stylesheet" href="static/css/santri.css">
-    <link rel="stylesheet" href="static/css/toastr.css">
-
-    <link rel="stylesheet" href="static/css-awesome/brands.css">
-    <link rel="stylesheet" href="static/css-awesome/fontawesome.css">
-    <link rel="stylesheet" href="static/css-awesome/regular.css">
-    <link rel="stylesheet" href="static/css-awesome/solid.css">
-    <link rel="stylesheet" href="static/css-awesome/svg-with-js.css">
-    <link rel="stylesheet" href="static/css-awesome/v4-shims.css">
-
-    <style>
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-
-      th, td {
-        text-align: left;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      tr:nth-child(even) {background-color: #f2f2f2;}
-    </style>
-
-  </head>
-  <body>
-    <script src="static/js/jquery.js"></script>
+<?php include(__DIR__ . "/../header.php"); ?>
     <div>
       <div id="lista_usuarios" class="w3-margin">
-        <input class="w3-input w3-border w3-margin-top" type="text" placeholder="Nome">
-        <button class="w3-button w3-theme w3-margin-top">Buscar</button>
-        <button class="w3-button w3-theme w3-margin-top w3-right">Cadastrar novo usuário</button>
-
+        <form method="post" action="<?= url(); ?>/search">
+          <?php form_method("POST"); ?>
+          <input class="w3-input w3-border w3-margin-top" name="nome" value="<?= $_POST['nome'];?>"type="text" placeholder="Nome">
+          <button type="submit" class="w3-button w3-theme w3-margin-top">Buscar</button>
+        </form>
         <table>
           <thead>
             <tr>
@@ -51,29 +17,23 @@
             </tr>
           </thead>
           <tbody>
+            <?php foreach($data['usuarios'] as $usuario) : ?>
             <tr>
-              <td>Maria Moraes</td>
-              <td>MARIA</td>
-              <td>Sim</td>
+              <td><?= $usuario->NOME_COMPLETO; ?></td>
+              <td><?= $usuario->LOGIN; ?></td>
+              <td><?= $usuario->ATIVO == 'S' ? 'SIM' : 'NÃO'; ?></td>
               <td>
-                <button class="w3-button w3-theme w3-margin-top"><i class="fas fa-user-times"></i></button>
-                <button class="w3-button w3-theme w3-margin-top"><i class="fas fa-edit"></i></button>
+                <button class="excluir_usuario w3-button w3-theme w3-margin-top" data-usuario="${usuario.USUARIO_ID}"><i class="fas fa-user-times"></i></button>
+                <a class="w3-button w3-theme w3-margin-top" href="<?= url() . "/usuarios/$usuario->USUARIO_ID"; ?>"><i class="fas fa-edit"></i></a>
               </td>
             </tr>
-
-            <tr>
-              <td>João da Silva</td>
-              <td>JOAO</td>
-              <td>Sim</td>
-              <td>
-                <button class="w3-button w3-theme w3-margin-top"><i class="fas fa-user-times"></i></button>
-                <button class="w3-button w3-theme w3-margin-top"><i class="fas fa-edit"></i></button>
-              </td>
-            </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
 
       </div>
-    </div>
-  </body>
-</html>
+<script src="<?= url() ?>/static/js/usuarios_search.js"></script>
+
+<?= call_modal('forms.excluir', $data); ?>
+
+<?php include(__DIR__ . "/../footer.php"); ?>

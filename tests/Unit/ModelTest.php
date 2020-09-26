@@ -27,9 +27,16 @@ final class ModelTest extends TestCase
 
     public function testGet(): void
     {
-        $usuario = $this->usuarioModel->get(5);
+        $id = $this->usuarioModel->create([
+            'LOGIN'     => "vitor.morais", 
+            'SENHA'     => "123456", 
+            'ATIVO'     => 'S', 
+            'NOME_COMPLETO' => "Vitor Silva Morais"
+        ]);
 
-        $this->assertEquals(5, $usuario->USUARIO_ID);
+        $usuario = $this->usuarioModel->get($id);
+
+        $this->assertEquals($id, $usuario->USUARIO_ID);
     }
 
     public function testGetAll(): void
@@ -39,7 +46,7 @@ final class ModelTest extends TestCase
         $this->usuarioModel->create([
             'LOGIN'     => "vitor.morais", 
             'SENHA'     => "123456", 
-            'ATIVO'     => 1, 
+            'ATIVO'     => 'S', 
             'NOME_COMPLETO' => "Vitor Silva Morais"
         ]);
 
@@ -54,7 +61,7 @@ final class ModelTest extends TestCase
         $retorno = $this->usuarioModel->create([
             'LOGIN'     => "vitor.morais", 
             'SENHA'     => "123456", 
-            'ATIVO'     => 1, 
+            'ATIVO'     => 'S', 
             'NOME_COMPLETO' => "Vitor Silva Morais"
         ]);
 
@@ -63,10 +70,17 @@ final class ModelTest extends TestCase
 
     public function testUpdate(): void
     {
-        $retorno = $this->usuarioModel->update(1, [
+        $id = $this->usuarioModel->create([
+            'LOGIN'     => "vitor.morais", 
+            'SENHA'     => "123456", 
+            'ATIVO'     => 'S', 
+            'NOME_COMPLETO' => "Vitor Silva Morais"
+        ]);
+
+        $retorno = $this->usuarioModel->update($id, [
             'LOGIN'     => "vitor.morais2", 
             'SENHA'     => "123456", 
-            'ATIVO'     => 1, 
+            'ATIVO'     => 'S', 
             'NOME_COMPLETO' => "Vitor Silva Morais"
         ]);
 
@@ -78,7 +92,7 @@ final class ModelTest extends TestCase
         $retorno = $this->usuarioModel->create([
             'LOGIN'     => "vitor.morais", 
             'SENHA'     => "123456", 
-            'ATIVO'     => 1, 
+            'ATIVO'     => 'S', 
             'NOME_COMPLETO' => "Vitor Silva Morais"
         ]);
 

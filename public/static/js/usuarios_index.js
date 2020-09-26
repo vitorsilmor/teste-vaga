@@ -13,7 +13,7 @@ $.get(`${url}/usuarios/index/json/data`, (function (data) {
                     <td>${usuario.ATIVO == 'S' ? 'SIM' : 'NÃO'}</td>
                     <td>
                     <button class="excluir_usuario w3-button w3-theme w3-margin-top" data-usuario="${usuario.USUARIO_ID}"><i class="fas fa-user-times"></i></button>
-                    <button type="button" class="atualizar_usuario w3-button w3-theme w3-margin-top"><i class="fas fa-edit"></i></button>
+                    <a type="button" class="atualizar_usuario w3-button w3-theme w3-margin-top" href="${url}/usuarios/${usuario.USUARIO_ID}"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
             `).appendTo('#tabela-usuarios');

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="<?php url(); ?>/static/css-awesome/solid.css">
     <link rel="stylesheet" href="<?php url(); ?>/static/css-awesome/svg-with-js.css">
     <link rel="stylesheet" href="<?php url(); ?>/static/css-awesome/v4-shims.css">
-
+    <script src="<?php url(); ?>/static/js/jquery.js"></script>
     <style>
       table {
         border-collapse: collapse;
@@ -55,9 +55,6 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="<?= url(); ?>/usuarios">Início <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<?= url(); ?>/usuarios/create">Cadastrar Novo Usuário</a>
             </li>
             <li class="nav-item "></li>
             <li class="nav-item"></li>

@@ -97,6 +97,7 @@ abstract class Model implements IModel
     {
         try {
             unset($data['method']);
+            
             $query  = "UPDATE $this->table SET ";
             $query  = $this->setColumnsOnQuery($query, $data, false);
             $query .= " WHERE $this->primaryKey = ?";

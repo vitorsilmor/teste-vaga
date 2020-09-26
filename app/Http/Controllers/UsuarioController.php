@@ -8,7 +8,7 @@ use App\Http\Request;
 class UsuarioController extends Controller
 {
     /**
-     * Undocumented function
+     * Mostra a lista de registros.
      *
      * @return void
      */
@@ -20,47 +20,40 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Undocumented function
+     * Mostra um registro.
      *
      * @return void
      */
     public function show(Request $request, int $id)
     {
-     
+        try {
+            $data['usuario'] = $this->model->get($id);
+
+            view('usuarios.show', $data);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
-     * Undocumented function
+     * Atualiza um registro.
      *
      * @return void
      */
-    public function create()
+    public function update(Request $request, int $id)
     {
+        try {
+            $data = (array) $request->data;
+            $this->model->update($id, $data);
 
+            return redirect('/usuarios/' . $id);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
     }
 
     /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function edit()
-    {
-
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function update()
-    {
-
-    }
-
-    /**
-     * Undocumented function
+     * Cria um novo registro.
      *
      * @return void
      */
@@ -78,7 +71,7 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Deleta um usuário.
+     * Deleta um registro.
      *
      * @return void
      */
@@ -89,6 +82,17 @@ class UsuarioController extends Controller
             $this->model->delete($id);
 
             return redirect('/usuarios?userDeleted=' . $id);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            $data['usuarios'] = $this->model->findByName($request->data->nome);
+
+            view('usuarios.search', $data);
         } catch (\Throwable $th) {
             echo $th->getMessage();
         }
