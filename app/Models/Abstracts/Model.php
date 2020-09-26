@@ -51,7 +51,8 @@ abstract class Model implements IModel
     public function getAll(): array
     {
         try {
-            $this->query = "SELECT * FROM $this->table";
+            
+            $this->query = "SELECT * FROM $this->table ORDER BY {$this->primaryKey} DESC";
             $stmt = $this->db->prepare($this->query);
             $stmt->execute();
 
@@ -70,6 +71,8 @@ abstract class Model implements IModel
      */
     public function create(array $data): int
     {
+        unset($data['method']);
+
         $this->query = "INSERT INTO $this->table(";
         $this->query = $this->setColumnsOnQuery($this->query, $data);
 
@@ -93,6 +96,7 @@ abstract class Model implements IModel
     public function update(int $id, array $data): bool
     {
         try {
+            unset($data['method']);
             $query  = "UPDATE $this->table SET ";
             $query  = $this->setColumnsOnQuery($query, $data, false);
             $query .= " WHERE $this->primaryKey = ?";
