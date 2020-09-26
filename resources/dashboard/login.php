@@ -36,6 +36,13 @@
         margin: auto;
         width: 380px;    
       }
+
+      .login-incorreto{
+        padding:10px;
+        background:#f8d7da;
+        color: #721c24;
+        border-radius:5px
+      }
     </style>
 
   </head>
@@ -43,7 +50,15 @@
     <script src="static/js/jquery.js"></script>
 
     <div id="login">
-      <img id="logo-cliente" class="w3-margin-top" src="static/imagens/logo_cliente.jpg"/>
+        <img id="logo-cliente" class="w3-margin-top" src="static/imagens/logo_cliente.jpg"/>
+        <?php if(isset($_GET['error'])): ?>
+            <div class="login-incorreto">Os dados estão incorretos ou o usuário não existe.</div>
+        <?php endif; ?>
+
+        <?php if(isset($_GET['needLogin'])): ?>
+            <div class="login-incorreto">Você precisa estar logado para acessar este recurso.</div>
+        <?php endif; ?>
+
         <form method="post" action="<?= url(); ?>/login">
             <input class="w3-input w3-border w3-margin-top" type="text" name="user" placeholder="Usuário">
             <input class="w3-input w3-border w3-margin-top" type="password" name="pass" placeholder="Senha">
