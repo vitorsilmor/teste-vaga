@@ -1,5 +1,7 @@
 <?php 
 
+namespace App\Http\Middlewares;
+
 final class LoginMiddleware
 {
     /**
@@ -12,7 +14,7 @@ final class LoginMiddleware
         session_start();
         
         if(!isset($_SESSION['USUARIO_ID']))
-            return false;
+            redirect('/?needLogin=true');
 
         return true;
     }
