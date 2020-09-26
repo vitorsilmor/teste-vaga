@@ -13,18 +13,16 @@ class FrontController extends FrontAbstract
      */
     public function start()
     {
+      
         $routeInfo  = $this->getRoute();
 
+        $this->executeMiddleware($routeInfo);
         $this->controllerExists($routeInfo['controller']);
         $this->actionExists($routeInfo['controller'], $routeInfo['action']);
 
         $controller = new $routeInfo['controller']();
 
-        if(!is_null($routeInfo['model'])){
-            $model = new $routeInfo['model'];
-            $model->setDb($this->db);
-            $controller->setModel($model);
-        }
+        $this->insertModelInController($controller, $routeInfo);
 
         $action = (string) $routeInfo['action'];
 
