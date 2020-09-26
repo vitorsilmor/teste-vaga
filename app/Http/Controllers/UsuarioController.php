@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Abstracts\Controller;
 use App\Http\Request;
-use App\Views\UsuarioView;
 
 class UsuarioController extends Controller
 {
@@ -15,7 +14,9 @@ class UsuarioController extends Controller
      */
     public function index(Request $request)
     {
-        view('usuarios.index');
+        $data['usuarios'] = $this->model->getAll();
+        
+        view('usuarios.index', $data);
     }
 
     /**
