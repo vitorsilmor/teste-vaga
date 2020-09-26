@@ -38,17 +38,18 @@ class Usuario extends Model
      */
     public function checkLogin(string $user, string $pass): ?stdClass
     {
-        try {
-            $this->query = "SELECT * FROM $this->table WHERE LOGIN = ? AND SENHA = ? AND ATIVO = 1";
+        $this->query = "SELECT * FROM $this->table WHERE LOGIN = ? AND SENHA = ? AND ATIVO = 1";
 
-            $stmt = $this->db->prepare($this->query);
-            $stmt->bindValue(1, $user);
-            $stmt->bindValue(2, $pass);
-            $stmt->execute();
+        $stmt = $this->db->prepare($this->query);
+        $stmt->bindValue(1, $user);
+        $stmt->bindValue(2, $pass);
+        $stmt->execute();
+        
+        $user = $stmt->fetch(\PDO::FETCH_OBJ);
+
+        if(!$user)
+            throw new \Exception("Dados incorretos ou usuário não existe. Tente novamente");
             
-            return $stmt->fetch(\PDO::FETCH_OBJ);
-        } catch (\PDOException $e) {
-            return $e;
-        }
+        return  $user;
     }
 }
