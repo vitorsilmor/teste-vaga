@@ -24,9 +24,9 @@ class UsuarioController extends Controller
      *
      * @return void
      */
-    public function show()
+    public function show(Request $request, int $id)
     {
-
+        var_dump($this->model->get($id));
     }
 
     /**
