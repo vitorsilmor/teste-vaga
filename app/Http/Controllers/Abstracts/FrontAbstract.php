@@ -76,12 +76,18 @@ abstract class FrontAbstract implements IFrontController
         $method = $this->request->getMethod();
         
         foreach($this->routes->getRoutes($method) as $route){
-            if($route['uri'] == $this->request->getUri()){
+            $uriWithoutGet = explode("?", $this->request->getUri());
+            
+            if($route['uri'] == $uriWithoutGet[0]){
                
                 $route['controller'] = getenv('path_controller') . $route['controller'];
 
                 if(!is_null($route['model'])){
                     $route['model'] = getenv('path_model') . $route['model'];
+                }
+
+                if(!is_null($route['middleware'])){
+                    $route['middleware'] = getenv('path_middleware') . $route['middleware'];
                 }
 
                 return $route;
@@ -114,5 +120,35 @@ abstract class FrontAbstract implements IFrontController
     {
         if(!method_exists ($controller, $action))
             throw new \Exception("A action " . $action . " não existe em " . $controller);
+    }
+
+    /**
+     * Executa o middleware, caso ele exista.
+     *
+     * @param array $routeInfo
+     * @return void
+     */
+    protected function executeMiddleware(array $routeInfo): void
+    {
+        if(!is_null($routeInfo['middleware'])){
+            $middleware = new $routeInfo['middleware']();
+            $middleware->handle();
+        }
+    }
+
+    /**
+     * Insere a model no controller, caso essa exista.
+     *
+     * @param Controller $controller
+     * @param array $routeInfo
+     * @return void
+     */
+    protected function insertModelInController(Controller &$controller, array $routeInfo): void
+    {
+        if(!is_null($routeInfo['model'])){
+            $model = new $routeInfo['model'];
+            $model->setDb($this->db);
+            $controller->setModel($model);
+        }
     }
 }
