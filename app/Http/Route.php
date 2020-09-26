@@ -19,13 +19,14 @@ class Route
      * @param string $action
      * @return Route
      */
-    public function get(string $uri, string $controller, string $action, ?string $model = null) : Route
+    public function get(string $uri, string $controller, string $action, ?string $model = null, ?string $middleware = null) : Route
     {
         $this->routes['get'][] = [
             'uri'        => $uri, 
             'controller' => $controller, 
             'action'     => $action, 
-            'model'      => $model
+            'model'      => $model,
+            'middleware' => $middleware
         ];
 
         return $this;
@@ -39,13 +40,14 @@ class Route
      * @param string $action
      * @return Route
      */
-    public function post(string $uri, string $controller, string $action, ?string $model = null) : Route
+    public function post(string $uri, string $controller, string $action, ?string $model = null, ?string $middleware = null) : Route
     {
         $this->routes['post'][] = [
             'uri'        => $uri, 
             'controller' => $controller, 
             'action'     => $action, 
-            'model'      => $model
+            'model'      => $model,
+            'middleware' => $middleware
         ];
 
         return $this;
@@ -59,13 +61,14 @@ class Route
      * @param string $action
      * @return Route
      */
-    public function put(string $uri, string $controller, string $action, ?string $model = null) : Route
+    public function put(string $uri, string $controller, string $action, ?string $model = null, ?string $middleware = null) : Route
     {
         $this->routes['put'][] = [
             'uri'        => $uri, 
             'controller' => $controller, 
             'action'     => $action, 
-            'model'      => $model
+            'model'      => $model,
+            'middleware' => $middleware
         ];
 
         return $this;
@@ -79,13 +82,14 @@ class Route
      * @param string $action
      * @return Route
      */
-    public function delete(string $uri, string $controller, string $action, ?string $model = null) : Route
+    public function delete(string $uri, string $controller, string $action, ?string $model = null, ?string $middleware = null) : Route
     {
         $this->routes['delete'][] = [
             'uri'        => $uri, 
             'controller' => $controller, 
             'action'     => $action, 
-            'model'      => $model
+            'model'      => $model,
+            'middleware' => $middleware
         ];
 
         return $this;
