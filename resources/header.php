@@ -34,8 +34,35 @@
       }
 
       tr:nth-child(even) {background-color: #f2f2f2;}
+
+      .barra-logado{
+        margin:10px 0 0 0;
+      }
     </style>
   </head>
   <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">SANTRI</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="<?= url(); ?>/usuarios">Início <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?= url(); ?>/usuarios/create">Cadastrar Novo Usuário</a>
+            </li>
+            <li class="nav-item "></li>
+            <li class="nav-item"></li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0" method="post" action="<?= url(); ?>/logout">
+            <button class="btn  my-2 my-sm-0 w3-button w3-theme" type="submit">SAIR</button>
+          </form>
+        </div>
+    </nav>
     <section class="row">
       <div class="container">
+        <div class="alert alert-info barra-logado">Você está logado como <strong><?= $_SESSION['NOME_COMPLETO']; ?></strong>.</div>
