@@ -1,56 +1,37 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>santri</title>
 
-    <link rel="stylesheet" href="<?php url(); ?>/static/css/w3.css">
-    <link rel="stylesheet" href="<?php url(); ?>static/css/santri.css">
-    <link rel="stylesheet" href="<?php url(); ?>static/css/toastr.css">
+<?php include(__DIR__ . "/../header.php"); ?>
+  <script src="static/js/jquery.js"></script>
+    <div>
+      <div id="lista_usuarios" class="w3-margin">
+        <input class="w3-input w3-border w3-margin-top" type="text" placeholder="Nome">
+        <button class="w3-button w3-theme w3-margin-top">Buscar</button>
+        <button class="w3-button w3-theme w3-margin-top w3-right">Cadastrar novo usuário</button>
 
-    <link rel="stylesheet" href="<?php url(); ?>static/css-awesome/brands.css">
-    <link rel="stylesheet" href="<?php url(); ?>static/css-awesome/fontawesome.css">
-    <link rel="stylesheet" href="<?php url(); ?>static/css-awesome/regular.css">
-    <link rel="stylesheet" href="<?php url(); ?>static/css-awesome/solid.css">
-    <link rel="stylesheet" href="<?php url(); ?>static/css-awesome/svg-with-js.css">
-    <link rel="stylesheet" href="<?php url(); ?>static/css-awesome/v4-shims.css">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</td>
+              <th>Login</td>
+              <th>Ativo</td>
+              <th>Opções</td>  
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($data['usuarios'] as $usuario): ?>
+              <tr>
+                <td><?= $usuario->NOME_COMPLETO; ?></td>
+                <td><?= $usuario->LOGIN; ?></td>
+                <td><?= $usuario->ATIVO == 1 ? 'SIM' : 'NÃO'; ?></td>
+                <td>
+                  <button class="w3-button w3-theme w3-margin-top"><i class="fas fa-user-times"></i></button>
+                  <button class="w3-button w3-theme w3-margin-top"><i class="fas fa-edit"></i></button>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
 
-    <style>
-      #login {
-        max-width: 95%;
-        margin: auto;
-        width: 380px;
-        margin-top: 5%;
-      }
-
-      #logo-cliente {
-        max-width: 100%;
-        margin: auto;
-        width: 700px;    
-      }
-
-      #logo-santri {
-        max-width: 50%;
-        margin: auto;
-        width: 380px;    
-      }
-    </style>
-
-  </head>
-  <body>
-    <script src="static/js/jquery.js"></script>
-
-    <div id="login">
-      <img id="logo-cliente" class="w3-margin-top" src="static/imagens/logo_cliente.jpg"/>
-      <input class="w3-input w3-border w3-margin-top" type="text" placeholder="Usuário">
-      <input class="w3-input w3-border w3-margin-top" type="password" placeholder="Senha">
-      <button class="w3-button w3-theme w3-margin-top w3-block">Logar</button>
-      
-      <a href="http://www.santri.com.br">
-        <img id="logo-santri" class="w3-right w3-margin-top" src="static/imagens/logo_santri.svg"/>
-      </a>
+      </div>
     </div>
-  </body>
-</html>
+<?php include(__DIR__ . "/../footer.php"); ?>
