@@ -15,17 +15,26 @@ use App\Http\Controllers\FrontController;
 /**
  * INCLUI O AUTOLOAD CONFORME ESPECICAÇÃO DA PSR-4
  */
-include "../vendor/autoload.php";
+include __DIR__ . "./../vendor/autoload.php";
 
-
-include "../config/env.php";
+/**
+ * IMPORTA AS CONFIGURAÇÕES DE AMBIENTE
+ */
+include __DIR__ . "./../config/env.php";
 
 /**
  * IMPORTA A SETAGEM DE ROTAS.
  */
-$routes = include "../config/route.php";
+$routes = include __DIR__ .   "./../config/route.php";
 
+/**
+ * FAZ A INSTANCIA COM A CLASSE DE CONEXÃO.
+ */
 $conn = new Connection();
+
+/**
+ * RETORNA A CONEXÃO COM O PDO.
+ */
 $db = $conn->connect();
 
 /**
