@@ -38,7 +38,7 @@ class Usuario extends Model
      */
     public function checkLogin(string $user, string $pass): ?stdClass
     {
-        $this->query = "SELECT * FROM $this->table WHERE LOGIN = ? AND SENHA = ? AND ATIVO = 1";
+        $this->query = "SELECT * FROM $this->table WHERE LOGIN = ? AND SENHA = ? AND ATIVO = 'S'";
 
         $stmt = $this->db->prepare($this->query);
         $stmt->bindValue(1, $user);
