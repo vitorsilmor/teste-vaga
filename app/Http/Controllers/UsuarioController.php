@@ -26,7 +26,7 @@ class UsuarioController extends Controller
      */
     public function show(Request $request, int $id)
     {
-        var_dump($this->model->get($id));
+     
     }
 
     /**
@@ -64,18 +64,33 @@ class UsuarioController extends Controller
      *
      * @return void
      */
-    public function store()
+    public function store(Request $request)
     {
+        try {
+            $dados = (array) $request->data;
+            $id = $this->model->create($dados);
 
+            return redirect('/usuarios?newUser=' . $id);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
+        
     }
 
     /**
-     * Undocumented function
+     * Deleta um usuário.
      *
      * @return void
      */
-    public function delete()
+    public function delete(Request $request)
     {
+        try {
+            $id = $request->data->USUARIO_ID;
+            $this->model->delete($id);
 
+            return redirect('/usuarios?userDeleted=' . $id);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+        }
     }
 }
