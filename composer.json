@@ -20,7 +20,7 @@
         ]
     },
     "scripts": {
-        "subir-servidor" : "cd public && php -S localhost:8000"
+        "subir-servidor" : "cd public && php -S localhost:8000 -t"
     },
     "config":{
         "process-timeout": 0
