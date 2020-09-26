@@ -19,6 +19,8 @@ class FrontController extends FrontAbstract
         $this->executeMiddleware($routeInfo);
         $this->controllerExists($routeInfo['controller']);
         $this->actionExists($routeInfo['controller'], $routeInfo['action']);
+        
+        $param = $this->getParam();
 
         $controller = new $routeInfo['controller']();
 
@@ -26,6 +28,6 @@ class FrontController extends FrontAbstract
 
         $action = (string) $routeInfo['action'];
 
-        $controller->$action($this->request);
+        $controller->$action($this->request, $param);
     }
 }
