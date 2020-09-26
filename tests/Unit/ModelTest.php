@@ -27,9 +27,9 @@ final class ModelTest extends TestCase
 
     public function testGet(): void
     {
-        $usuario = $this->usuarioModel->get(1);
+        $usuario = $this->usuarioModel->get(5);
 
-        $this->assertEquals(1, $usuario->USUARIO_ID);
+        $this->assertEquals(5, $usuario->USUARIO_ID);
     }
 
     public function testGetAll(): void
