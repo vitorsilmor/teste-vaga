@@ -38,6 +38,10 @@
       .barra-logado{
         margin:10px 0 0 0;
       }
+
+      .hidden{
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -65,4 +69,4 @@
     </nav>
     <section class="row">
       <div class="container">
-        <div class="alert alert-info barra-logado">Você está logado como <strong><?= $_SESSION['NOME_COMPLETO']; ?></strong>.</div>
+        <div class="alert alert-info barra-logado"></div>

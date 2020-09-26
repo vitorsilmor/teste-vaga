@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -43,6 +43,10 @@
         color: #721c24;
         border-radius:5px
       }
+
+      .hidden{
+        display: none;
+      }
     </style>
 
   </head>
@@ -60,6 +64,7 @@
         <?php endif; ?>
 
         <form method="post" action="<?= url(); ?>/login">
+            <?= form_method('POST'); ?>
             <input class="w3-input w3-border w3-margin-top" type="text" name="user" placeholder="Usuário">
             <input class="w3-input w3-border w3-margin-top" type="password" name="pass" placeholder="Senha">
             <button type="submit" class="w3-button w3-theme w3-margin-top w3-block">Logar</button>
