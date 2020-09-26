@@ -34,8 +34,8 @@ abstract class FrontAbstract implements IFrontController
         $request = new Request();
 
         $request->setUri($_SERVER['REQUEST_URI']);
-        $request->setMethod($_SERVER['REQUEST_METHOD']);
         $request->setData($_REQUEST);
+        $request->setMethod($_REQUEST['method'] ?? $_SERVER['REQUEST_METHOD']);
 
         $this->request = $request;
     }
@@ -151,7 +151,10 @@ abstract class FrontAbstract implements IFrontController
      */
     private function parseToUri(string $pattern): string
     {
-        return implode('/', array_filter(explode('/', $pattern)));
+        $uri =  implode('/', array_filter(explode('/', $pattern)));
+        $uriWithoutGet = explode('?', $uri);
+
+        return $uriWithoutGet[0];
     }
 
     /**
